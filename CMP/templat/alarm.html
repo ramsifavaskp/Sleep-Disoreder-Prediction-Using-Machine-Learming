@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Alarm Clock App</title>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='mental health t ae452578-381c-4e5c-9387-1e1af25de5f7-photoaidcom-cropped.png') }}">   
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" integrity="sha384-rOA1PnstxnOBLzCLMcre8ybwbTmemjzdNlILg8O7z1lUkLXozs4DHonlDtnE7fpc" crossorigin="anonymous"></script>
+    <style>
+        /* CSS Styles */
+        @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;1,100;1,200;1,300;1,400;1,500;1,600&display=swap');
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: system-ui;
+        }
+
+        /* Material Design icons */
+        .material-symbols-outlined {
+            font-variation-settings:
+            'FILL' 0,
+            'wght' 400,
+            'GRAD' 0,
+            'opsz' 48
+        }
+
+        /* Selection color */
+        ::selection {
+            color: #fff;
+            background: #4db2ec;
+        }
+
+        /* Body styles */
+        body {
+            
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        /* Page title */
+        #page-title {
+            color: #fff;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        /* Title HR */
+        #title_hr {
+            width: 60px;
+            border: 2px solid #ffffff;
+            margin: .35em auto;
+        }
+
+        /* Wrapper for clock and form */
+        div#form-wrapper,
+        div#clock-wrapper {
+            width: 400px;
+            margin: 0 auto;
+            padding: 0.75em 0.75em;
+            background: #fff;
+            border: 1px solid #5e5e5e;
+            margin-bottom: 1em;
+        }
+
+        /* Clock wrapper */
+        div#clock-wrapper {
+            margin-top: 1em;
+            min-height: 3em;
+        }
+
+        /* Responsive layout for small screens */
+        @media (max-width: 400px) {
+            div#form-wrapper,
+            div#clock-wrapper {
+                width: 100%;
+            }
+        }
+
+        /* Digital Clock styles */
+        div#digital-clock {
+            text-align: center;
+            font-size: 1.4rem;
+            font-weight: 500;
+            letter-spacing: 2px;
+            color: #303030;
+        }
+
+        /* Form wrapper */
+        #form-wrapper {
+            width: 100%;
+        }
+
+        /* Input styles */
+        input.form-input {
+            padding: 0.35em 0.45em;
+            border: 1px solid #e1e1e1;
+            outline: none;
+        }
+
+        input.form-input:focus {
+            border: 1px solid #4785dfa8;
+        }
+
+        /* Button styles */
+        button#form-button {
+            width: 15%;
+            padding: 0.35em;
+            background: #0081ef;
+            color: #fff;
+            border: 1px solid #0081ef;
+        }
+
+        button#form-button:hover,
+        button#form-button:focus {
+            background: #005aff;
+            border: 1px solid #005aff;
+        }
+
+        /* Alarm List styles */
+        div#alarm_list {
+            width: 400px;
+            background: #fff;
+            margin: 0 auto;
+            padding: 0.35em 0;
+        }
+
+        div#alarm_list:empty:before {
+            content: "No alarm listed yet";
+            display: block;
+            width: calc(100% - 0.7em);
+            text-align: center;
+            color: #969696;
+            font-size: .8rem;
+            font-style: italic;
+            padding: 0.75em 0.35em;
+        }
+
+        div#alarm_list .list-item {
+            display: flex;
+            width: 100%;
+            padding: .35em .75em;
+        }
+
+        div#alarm_list .list-item:has(~ .list-item) {
+            border-bottom: 1px solid #969696;
+        }
+
+        /* Switch toggle styles */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 30px;
+            height: 11px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 12px;
+            width: 12px;
+            left: 0px;
+            bottom: -1px;
+            background-color: white;
+            border: 1px solid #dfcfcf;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+
+        input:checked + .slider {
+            background-color: #2196F3;
+        }
+
+        input:focus + .slider {
+            box-shadow: 0 0 1px #2196F3;
+        }
+
+        input:checked + .slider:before {
+            -webkit-transform: translateX(17px);
+            -ms-transform: translateX(17px);
+            transform: translateX(17px);
+        }
+
+        /* Rounded sliders */
+        .slider.round {
+            border-radius: 34px;
+        }
+
+        .slider.round:before {
+            border-radius: 50%;
+        }
+
+        /* Alarm Item Content styles */
+        .list-item>div:nth-child(1) {
+            width: 80%;
+        }
+
+        .list-item>div:nth-child(2),
+        .list-item>div:nth-child(3) {
+            width: 10%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .alarm {
+            font-size: 1.2rem;
+            font-weight: 400;
+            letter-spacing: 1.5px;
+        }
+
+        a.rem-alarm {
+            color: #f34444;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        a.rem-alarm:hover,
+        a.rem-alarm:active {
+            color: #c21c1c;
+        }
+
+        div#startBtn-container {
+            width: 200px;
+            margin: 1em auto;
+        }
+
+        button#startBtn {
+            width: 100%;
+            padding: 1em;
+            background: #0497ff;
+            border: 1px solid #0497ff;
+            color: #fff;
+            font-weight: 600;
+            border-radius: 3rem;
+            cursor: pointer;
+        }
+
+        button#startBtn:hover,
+        button#startBtn:active {
+            background: #0571bd;
+            border-color: #0571bd;
+        }
+
+        #clock-wrapper,
+        #form-wrapper,
+        #alarm_list {
+            display: none;
+        }
+        .center-align {
+            text-align: center;
+            border-radius: 1000px;
+        }
+        nav {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+        .logo-img {
+            width: 41px;
+        }
+        .navbar-brand {
+            font-weight: bold; /* Set font weight to bold */
+        }
+        .compnav-text {
+            font-family: emoji;
+            font-size: xx-large;
+            margin-top: -11px;
+        }
+        
+        
+    </style>
+</head>
+<body style="background-image: url('/static/top-view-red-alarm-clock.jpg'); background-size: cover; background-position: center;">
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-success">
+        <a class="navbar-brand" href="#">
+            <img class="logo-img" src="{{ url_for('static', filename='mental health t ae452578-381c-4e5c-9387-1e1af25de5f7-photoaidcom-cropped.png') }}" alt="Example Image">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-between " id="navbarTogglerDemo01">
+            <a class="navbar-brand compnav-text" href="#">COMPANION</a>
+            <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+                <!-- <li class="nav-item active">
+                    <a class="nav-link" href="#">Need Help?<span class="sr-only">(current)</span></a>
+                </li> -->
+
+                <li class="nav-item active">
+                    <a class="nav-link" href="reso.html">Resources<span class="sr-only">(current)</span></a>
+                </li>
+
+                <li class="nav-item active">
+                    <a class="nav-link" href="http://localhost:3000/">AI Chatbot<span class="sr-only">(current)</span></a>
+                </li>
+
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Contact<span class="sr-only">(current)</span></a>
+                </li>
+
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">About<span class="sr-only">(current)</span></a>
+                </li>
+
+            </ul>
+        </div>
+    </nav>
+
+<div class="container" style="padding-top: 170px;">
+    <h1 id="page-title" style="color: #303030;">Alarm Clock</h1>
+    <hr id="title_hr">
+    <!-- Clock Wrapper -->
+    <div id="clock-wrapper">
+        <div id="digital-clock"></div>
+    </div>
+
+    <!-- Alarm Form Wrapper -->
+    <div id="form-wrapper">
+        <form action="" id="alarm-form">
+            <input type="time" class="form-input" id="alarm_time" required>
+            <button id="form-button" title="Save Item"><i class="fa fa-save"></i></button>
+        </form>
+    </div>
+
+    <!-- Alarm List Wrapper -->
+    <div id="alarm_list"></div>
+    <!-- Alarm List Wrapper -->
+
+    <div id="startBtn-container">
+        <button id="startBtn" style="font-family: cursive;">Start Alarm Clock</button>
+    </div>
+    <div class="center-align">
+        <a style="font-family: math;border-radius: 7px;" href="index.html" class="btn btn-primary">Go Back</a>
+    </div>
+</div>
+
+<script>
+    // JavaScript Code
+    // Start Button
+    const startBtn = document.getElementById('startBtn');
+    // Digital Clock Container
+    const digitalClockEl = document.getElementById('clock-wrapper');
+    // Digital Clock Content Selector
+    const digitalClock = document.getElementById('digital-clock');
+    // Alarm Form Selector
+    const alarmForm = document.getElementById('alarm-form');
+    // Alarm List Container
+    const alarmEl = document.getElementById('alarm_list');
+    // Alarm List
+    let alarmList = JSON.parse(localStorage.getItem('alarm_list')) || [];
+
+    let alarmAudio = new Audio();
+    alarmAudio.src = `alarm-sound.wav`;
+    alarmAudio.loop = true;
+    alarmAudio.onpause = function () {
+        alarmAudio.currentTime = 0;
+    };
+
+    let currentDate;
+
+    // Initialize Digital Clock
+    const digitalClockInit = () => {
+        setInterval(() => {
+            var now = new Date();
+            hour = now.getHours();
+            min = now.getMinutes();
+            sec = now.getSeconds();
+            am_pm = hour > 12 ? "PM" : "AM";
+            var hour12 = hour > 12 ? hour - 12 : hour;
+            hour = String(hour).padStart(2, 0);
+            hour12 = String(hour12).padStart(2, 0);
+            min = String(min).padStart(2, 0);
+            sec = String(sec).padStart(2, 0);
+            currentDate = `${hour}:${min}`;
+            digitalClock.innerText = `${hour12}:${min}:${sec} ${am_pm}`;
+            checkAlarm();
+        }, 500);
+        loadAlarmList();
+    };
+
+    // Load Alarm List
+    const loadAlarmList = () => {
+        alarmEl.innerHTML = ``;
+        alarmList.forEach((data, idx) => {
+            var div = document.createElement(`div`);
+            div.classList.add('list-item');
+            div.innerHTML = `<div class="alarm"></div>
+                             <div class="alarm-switch">
+                             <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider round"></span>
+                             </label>
+                             </div>
+                             <div class=""><a class="rem-alarm"><i class="fa fa-trash"></i></a></div>`;
+            var time = data.alarm_time;
+            time = time.split(":");
+            am_pm = parseInt(time[0]) > 12 ? "PM" : "AM";
+            hour = parseInt(time[0]) > 12 ? parseInt(time[0]) - 12 : parseInt(time[0]);
+            hour = String(hour).padStart(2, 0);
+            div.querySelector('.alarm').innerText = `${hour}:${time[1]} ${am_pm}`;
+            if (data.status == 1) {
+                div.querySelector('.switch input[type="checkbox"]').setAttribute('checked', true);
+            }
+            alarmEl.appendChild(div);
+            div.querySelector('.rem-alarm').addEventListener('click', e => {
+                e.preventDefault();
+                deleteAlarm(idx);
+            });
+            div.querySelector('.switch input[type="checkbox"]').addEventListener('change', () => {
+                var is_checked = div.querySelector('.switch input[type="checkbox"]').checked;
+                updateAlarmStatus(idx, is_checked);
+            });
+        });
+    };
+
+    // Delete Alarm
+    const deleteAlarm = (idx) => {
+        if (confirm(`Are you sure to remove this alarm item?`) === true) {
+            if (alarmList[idx])
+                delete alarmList[idx];
+            alarmList = alarmList.filter(el => el);
+            localStorage.setItem('alarm_list', JSON.stringify(alarmList));
+            loadAlarmList();
+        }
+    };
+
+    // Update Alarm Status
+    const updateAlarmStatus = (idx, is_checked) => {
+        if (alarmList[idx])
+            alarmList[idx].status = (is_checked == true) ? 1 : 0;
+        localStorage.setItem('alarm_list', JSON.stringify(alarmList));
+        loadAlarmList();
+        checkAlarm();
+    };
+
+    // Check Alarm
+    const checkAlarm = async () => {
+        var has_alarm = false;
+        await alarmList.forEach(data => {
+            if (data.status == 1 && currentDate >= data.alarm_time) {
+                has_alarm = true;
+            }
+        });
+        if (has_alarm) {
+            alarmAudio.play();
+        } else {
+            alarmAudio.pause();
+        }
+    };
+
+    // Form Submit
+    alarmForm.addEventListener('submit', e => {
+        e.preventDefault();
+        var alarm = document.getElementById('alarm_time').value;
+        alarmList.push({
+            alarm_time: alarm,
+            status: 1
+        });
+        localStorage.setItem('alarm_list', JSON.stringify(alarmList));
+        alarmForm.reset();
+        loadAlarmList();
+    });
+
+    window.onload = function () {
+        document.body.appendChild(alarmAudio);
+        startBtn.addEventListener('click', e => {
+            e.preventDefault();
+            digitalClockEl.style.display = `block`;
+            alarmForm.closest('#form-wrapper').style.display = `block`;
+            alarmEl.style.display = `block`;
+            startBtn.style.display = `none`;
+            digitalClockInit();
+        });
+    };
+</script>
+</body>
+</html>

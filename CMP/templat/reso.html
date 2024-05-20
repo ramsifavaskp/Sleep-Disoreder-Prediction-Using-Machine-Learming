@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resources</title>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='mental health t ae452578-381c-4e5c-9387-1e1af25de5f7-photoaidcom-cropped.png') }}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        nav {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+        .logo-img {
+            width: 41px;
+        }
+        .navbar-brand {
+            font-weight: bold; /* Set font weight to bold */
+        }
+        .compnav-text {
+            font-family: emoji;
+            font-size: xx-large;
+            margin-top: -11px;
+        }
+        .body-buttton {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+          }
+          
+          .button-container {
+            padding-top: 50px;
+            padding-bottom: 50px;
+            display: flex;
+            justify-content: space-evenly;
+          }
+          
+          .book-button {
+            font-family:  emoji;
+            width: 240px;
+            border-radius: 20px;
+            height: 175px;
+            padding: 10px 20px;
+            border: none;
+            background-color: #90EE91;
+            color: #fff;
+            align-items: center;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+          }
+          
+          .book-button:hover {
+            background-color:#fff;
+          }
+          .video-container {
+            padding-top: 50px;
+            padding-bottom: 50px;
+            display: flex;
+            justify-content: space-evenly;
+            margin: 20px auto;
+        
+        }
+        
+        iframe {
+            margin-right: 10px;
+        }
+        .art-vid-div{
+            font-family: emoji;
+            width: 100%;
+            background-color: #90EE91;
+            height: 60px;
+        }
+        @import url("https://fonts.googleapis.com/css?family=Roboto");
+@-webkit-keyframes come-in {
+  0% {
+    -webkit-transform: translatey(100px);
+    transform: translatey(100px);
+    opacity: 0;
+  }
+  30% {
+    -webkit-transform: translateX(-50px) scale(0.4);
+    transform: translateX(-50px) scale(0.4);
+  }
+  70% {
+    -webkit-transform: translateX(0px) scale(1.2);
+    transform: translateX(0px) scale(1.2);
+  }
+  100% {
+    -webkit-transform: translatey(0px) scale(1);
+    transform: translatey(0px) scale(1);
+    opacity: 1;
+  }
+}
+@keyframes come-in {
+  0% {
+    -webkit-transform: translatey(100px);
+    transform: translatey(100px);
+    opacity: 0;
+  }
+  30% {
+    -webkit-transform: translateX(-50px) scale(0.4);
+    transform: translateX(-50px) scale(0.4);
+  }
+  70% {
+    -webkit-transform: translateX(0px) scale(1.2);
+    transform: translateX(0px) scale(1.2);
+  }
+  100% {
+    -webkit-transform: translatey(0px) scale(1);
+    transform: translatey(0px) scale(1);
+    opacity: 1;
+  }
+}
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  background: #eaedf2;
+  font-family: "Roboto", sans-serif;
+}
+            .floating-container {
+                position: fixed;
+                width: 100px;
+                height: 100px;
+                bottom: 0;
+                right: 0;
+                margin: 35px 25px;
+              }
+              .floating-container:hover {
+                height: 300px;
+              }
+              .floating-container:hover .floating-button {
+                box-shadow: 0 10px 25px #90EE91;
+                -webkit-transform: translatey(5px);
+                transform: translatey(5px);
+                -webkit-transition: all 0.3s;
+                transition: all 0.3s;
+              }
+              .floating-container:hover .element-container .float-element:nth-child(1) {
+                -webkit-animation: come-in 0.4s forwards 0.2s;
+                animation: come-in 0.4s forwards 0.2s;
+              }
+              .floating-container:hover .element-container .float-element:nth-child(2) {
+                -webkit-animation: come-in 0.4s forwards 0.4s;
+                animation: come-in 0.4s forwards 0.4s;
+              }
+              .floating-container:hover .element-container .float-element:nth-child(3) {
+                -webkit-animation: come-in 0.4s forwards 0.6s;
+                animation: come-in 0.4s forwards 0.6s;
+              }
+              .floating-container .floating-button {
+                position: absolute;
+                width: 65px;
+                height: 65px;
+                background: #90EE91;
+                bottom: 0;
+                border-radius: 50%;
+                left: 0;
+                right: 0;
+                margin: auto;
+                color: white;
+                line-height: 65px;
+                text-align: center;
+                font-size: 23px;
+                z-index: 100;
+                
+                cursor: pointer;
+                -webkit-transition: all 0.3s;
+                transition: all 0.3s;
+              }
+              .floating-container .float-element {
+                position: relative;
+                display: block;
+                border-radius: 50%;
+                width: 50px;
+                height: 50px;
+                margin: 15px auto;
+                color: white;
+                font-weight: 500;
+                text-align: center;
+                line-height: 50px;
+                z-index: 0;
+                opacity: 0;
+                -webkit-transform: translateY(100px);
+                transform: translateY(100px);
+              }
+              .floating-container .float-element .material-icons {
+                vertical-align: middle;
+                font-size: 16px;
+              }
+              .floating-container .float-element:nth-child(1) {
+                background: #28a745;
+                
+              }
+              .floating-container .float-element:nth-child(2) {
+                background: #4caf50;
+                box-shadow: 0 20px 20px -10px rgba(76, 175, 80, 0.5);
+              }
+              .floating-container .float-element:nth-child(3) {
+                background: #ff9800;
+                box-shadow: 0 20px 20px -10px rgba(255, 152, 0, 0.5);
+              }
+    </style>
+</head>
+<body style="background-color: #378b29;background-image: linear-gradient(315deg, #378b29 0%, #74d680 74%);">
+    <nav class="navbar navbar-expand-lg navbar-light bg-success">
+        <a class="navbar-brand" href="#">
+            <img class="logo-img" src="{{ url_for('static', filename='mental health t ae452578-381c-4e5c-9387-1e1af25de5f7-photoaidcom-cropped.png') }}" alt="no image found">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-between " id="navbarTogglerDemo01">
+            <a class="navbar-brand compnav-text" href="#">COMPANION</a>
+            <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+
+                <li class="nav-item active">
+                    <a class="nav-link" href="http://localhost:3000/">AI Chatbot<span class="sr-only">(current)</span></a>
+                </li>
+
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Contact<span class="sr-only">(current)</span></a>
+                </li>
+
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">About<span class="sr-only">(current)</span></a>
+                </li>
+
+            </ul>
+        </div>
+    </nav>
+
+    <!-- <div class="body-buttton button-container">
+        <button class="book-button" onclick="downloadBook('https://www.researchgate.net/publication/42389723_Overview_of_sleep_sleep_disorders')">Download Book 1</button>
+        <button class="book-button" onclick="downloadBook('https://example.com/book2.pdf')">Download Book 2</button>
+        <button class="book-button" onclick="downloadBook('https://example.com/book3.pdf')">Download Book 3</button>
+    </div> -->
+
+    <center>
+    <div class="art-vid-div"><u><h1 style="font-family: 'emoji;">Articles</h1></u></div>
+    <!-- <div class="body-button button-container">
+        <a href="https://www.researchgate.net/publication/42389723_Overview_of_sleep_sleep_disorders" class="book-button"><u><b><h5>Book-1</h5></b></u><br>Overview of Sleep & Sleep disorders</a>
+        <a href="https://link.springer.com/book/10.1007/978-3-030-65302-6" class="book-button"><u><b><h5>Book-2</h5></b></u><br>Sleep Disorders<br>(An Algorithmic Approach to Differential Diagnosis)</a>
+        <a href="https://link.springer.com/book/10.1007/978-1-4939-6578-6" class="book-button"><u><b><h5>Book-3</h5></b></u><br>Sleep Disorders Medicine<br>(Basic Science, Technical Considerations and Clinical Aspects)</a>  
+    </div> -->
+    <div class="container">
+        <div class="body-button button-container">
+            <a href="https://www.researchgate.net/publication/42389723_Overview_of_sleep_sleep_disorders" class="book-button">
+                <h5><u><b>Book-1</b></u></h5>
+                <p>Overview of Sleep & Sleep disorders</p>
+            </a>
+            <a href="https://link.springer.com/book/10.1007/978-3-030-65302-6" class="book-button">
+                <h5><u><b>Book-2</b></u></h5>
+                <p>Sleep Disorders (An Algorithmic Approach to Differential Diagnosis)</p>
+            </a>
+            <a href="https://link.springer.com/book/10.1007/978-1-4939-6578-6" class="book-button">
+                <h5><u><b>Book-3</b></u></h5>
+                <p>Sleep Disorders Medicine (Basic Science, Technical Considerations and Clinical Aspects)</p>
+            </a>  
+        </div>
+    </div>
+    </center>
+
+    <center>
+    <div class="art-vid-div"><u><h1>Videos </h1></u></div>
+    <!-- <div class="video-container">
+        <iframe width="300" height="200" src="https://www.youtube.com/embed/VIDEO_ID_1" frameborder="0" allowfullscreen></iframe>
+        <iframe width="300" height="200" src="https://www.youtube.com/embed/VIDEO_ID_2" frameborder="0" allowfullscreen></iframe>
+        <iframe width="300" height="200" src="https://www.youtube.com/embed/VIDEO_ID_3" frameborder="0" allowfullscreen></iframe>
+    </div> -->
+    <div class="container video-container">
+        <div class="row">
+            <div class="col-sm-4">
+                <iframe width="100%" height="200" src="https://www.youtube.com/embed/LeOYEMg_EVE?si=QmhoLkFOTgICiS0T" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
+            <div class="col-sm-4">
+                <iframe width="100%" height="200" src="https://www.youtube.com/embed/cHKs2aVxOmQ?si=8TXbXp1TwdH3yytQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
+            <div class="col-sm-4">
+                <iframe width="100%" height="200" src="https://www.youtube.com/embed/IzQ2siryQrM?si=1Jq-4bIzaJ2ZJE6i" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+    </center>
+    <div>
+        <div class="floating-container">
+            <div class="floating-button" style="color: #333;font-weight: bold">+</div>
+            <div class="element-container">
+          
+              <a href="reso.html"> <span class="float-element tooltip-left">
+                  <i class="bi bi-collection">
+                  </i></a>
+              </span>
+              <a href="http://localhost:3000/"> <span class="float-element tooltip-left">
+                <i class="bi bi-robot">
+                </i></a>
+            </span>
+            <a href="alarm.html"> <span class="float-element tooltip-left">
+                <i class="bi bi-alarm">
+                </i></a>
+            </span>
+              <!-- <span class="float-element">
+                <i class="material-icons">email
+                </i>
+              </span>
+              <span class="float-element">
+                <i class="material-icons">chat</i>
+              </span> -->
+            </div>
+          </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
